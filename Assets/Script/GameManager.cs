@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour {
 
     public FrogManager m_frogManager { get; private set; }
 
-
+    
     private CameraController m_cameraController;
 
     void Start()
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour {
 
         m_cameraController = FindObjectOfType<CameraController>();
         m_cameraController.Initialize();
+
 
         //m_textManager = new TextManager();
         //m_textManager.Initialize();
