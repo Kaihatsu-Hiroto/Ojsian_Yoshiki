@@ -6,17 +6,26 @@ public class Frog : MonoBehaviour {
 
     public PowerGage m_powerGage { get; private set; }
 
-    Rigidbody2D rigidbody;//上昇
+    Rigidbody2D rigidbody;
     Animator animator;
 
+    //着地用変数
     bool isGrounded;
 
-    public Vector3 power = new Vector3(0, 0);//跳躍力
-    Vector3 chargePow = new Vector3(0.5f, 0.5f);
+    //プレイヤー跳躍力
+    public Vector3 power = new Vector3(0, 0);
 
+    //加算減算用跳躍力
+    Vector3 CHARGE_POW = new Vector3(0.5f, 0.5f);
+
+    //切り返し用フラグ
     int chargeVec = 1;
-    Vector3 MAXPOWER = new Vector3(10f, 10f);//最大パワー
-    Vector3 LOWPOWER = new Vector3(0f, 0f);//最小パワー&リセット
+
+    //最大パワー  //最小パワー&リセット
+    Vector3 MAXPOWER = new Vector3(10f, 10f);
+    Vector3 LOWPOWER = new Vector3(0f, 0f);
+
+    //チャージ用フラグ
     bool CHARGE = false;
 
 
@@ -25,7 +34,7 @@ public class Frog : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         m_powerGage = new PowerGage();
-        m_powerGage.Initialize();  //初期化
+        m_powerGage.Initialize(); 
     }
 
     public void UpdateByFrame()
@@ -35,10 +44,12 @@ public class Frog : MonoBehaviour {
 
     }
 
+
+    //ジャンプ入力関係
     void GetKeyCode()
     {
 
-        //地面に接しているかを算出
+        //葉っぱに接しているかを算出
         isGrounded = Physics2D.Raycast(
             transform.position, Vector2.down,
             1.6f, 1 << LayerMask.NameToLayer("Leaf"));
@@ -61,6 +72,7 @@ public class Frog : MonoBehaviour {
         m_powerGage.UpdateByFrame();
     }
 
+    //ジャンプ力チャージ
     void Charge()
     {
         if(chargeVec == 1)
@@ -69,15 +81,18 @@ public class Frog : MonoBehaviour {
             Low();
     }
 
+    //チャージ上昇時
     void High()
     {
-        power += chargePow;
+        power += CHARGE_POW;
         if (power.x > MAXPOWER.x)
             chargeVec = -1;
     }
+
+    //チャージ減少時
     void Low()
     {
-        power -= chargePow;
+        power -= CHARGE_POW;
         if (power.x < LOWPOWER.x)
             chargeVec = 1;
     }
