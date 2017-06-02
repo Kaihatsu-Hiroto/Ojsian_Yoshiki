@@ -9,6 +9,8 @@ public class Frog : MonoBehaviour {
     Rigidbody2D rigidbody;//上昇
     Animator animator;
 
+    bool isGrounded;
+
     public Vector3 power = new Vector3(0, 0);//跳躍力
     Vector3 chargePow = new Vector3(0.5f, 0.5f);
 
@@ -28,25 +30,35 @@ public class Frog : MonoBehaviour {
 
     public void UpdateByFrame()
     {
-
-        if(Input.GetKey(KeyCode.Space))
-        {
-            Charge();
-            Debug.Log(power.x);
-
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            animator.Play("FrogJump");//機能してない
-            rigidbody.velocity = power;
-            power = LOWPOWER;
-        }
-        else
-        {
-            animator.Play("FrogIdle");
-        }
+        GetKeyCode();
         m_powerGage.UpdateByFrame();
 
+    }
+
+    void GetKeyCode()
+    {
+
+        //地面に接しているかを算出
+        isGrounded = Physics2D.Raycast(
+            transform.position, Vector2.down,
+            1.6f, 1 << LayerMask.NameToLayer("Leaf"));
+
+        if (isGrounded)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Charge();
+                Debug.Log(power.x);
+
+            }
+            else if (Input.GetKeyUp(KeyCode.Space))
+            {
+                animator.Play("FrogJump");//機能してない
+                rigidbody.velocity = power;
+                power = LOWPOWER;
+            }
+        }
+        m_powerGage.UpdateByFrame();
     }
 
     void Charge()
