@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
 
     public FrogManager m_frogManager { get; private set; }
 
+    public FallManager m_fallManager { get; private set; }
     
     private CameraController m_cameraController;
 
@@ -36,8 +37,11 @@ public class GameManager : MonoBehaviour {
         m_frogManager = FrogManager.Instance;
         m_frogManager.Initialize();  //初期化
 
+        m_fallManager = new FallManager();
+        m_fallManager.Initialize();  //初期化
+
         //m_monsterManager = MonsterManager.Instance;
-       // m_monsterManager.Initialize();  //初期化
+        // m_monsterManager.Initialize();  //初期化
 
         m_cameraController = FindObjectOfType<CameraController>();
         m_cameraController.Initialize();
@@ -47,15 +51,13 @@ public class GameManager : MonoBehaviour {
         //m_textManager.Initialize();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-
 
         //m_textManager.UpdateByFrame();
         m_cameraController.UpdateByFrame();
         // m_monsterManager.UpdateByFrame();
         m_frogManager.UpdateByFrame();
+        m_fallManager.UpdateByFrame();
     }
 }
