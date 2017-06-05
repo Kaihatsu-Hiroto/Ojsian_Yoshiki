@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour {
 
         if (frogPos.x < 0)
         transform.position = new Vector3(frogPos.x + 5, 0, -10);
-
+        
         if (frogPos.x > 0)
         {
             transform.position = new Vector3(frogPos.x + 5, 0, -10);
