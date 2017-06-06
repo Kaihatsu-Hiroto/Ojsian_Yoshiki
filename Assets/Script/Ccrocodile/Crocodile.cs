@@ -32,9 +32,7 @@ public class Crocodile : MonoBehaviour {
         }
         if (WaniPos.y < -5)
         {
-            transform.position = new Vector3(WaniPos.x,WaniPos.y+1, -3);
-            
-            
+            transform.position = new Vector3(WaniPos.x,-4, -3);
         }
       
        

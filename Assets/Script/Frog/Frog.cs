@@ -10,7 +10,7 @@ public class Frog : MonoBehaviour {
     Animator animator;
 
     //着地用変数
-    bool isGrounded;
+    bool isGrounded;           
 
     //プレイヤー跳躍力
     public Vector3 power = new Vector3(0, 0);
