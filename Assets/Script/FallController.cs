@@ -4,42 +4,46 @@ using UnityEngine;
 
 public class FallController : MonoBehaviour {
 
-    GameObject obj;
+    public GameObject obj;
 
-    Vector3 SPEED = new Vector3(0, 0.1f);
+    Vector3 SPEED = new Vector3(0, 0.01f);
 
-    bool FALLING = false;
+    bool falling;
 
     Vector3 RestartPos; 
    
 
     public void Initialize()
     {
-
+        falling = false;
+        obj = GameObject.Find("FallLeaf");
         RestartPos = obj.transform.position; 
     }
 
 	public void UpdateByFrame()
     {
-        if (FALLING)
-        {
-            Fall();
-        }
+        Fall();
         //else
         //{
         //    RetrunTo();
         //}
-	}
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        
-        FALLING = true;
+        falling = true;
+        Debug.Log(falling);
     }
 
     void Fall()
     {
-        obj.transform.position -= SPEED;
+        if (falling)
+        {
+            Debug.Log("Falling");
+            Vector3 Pos = obj.transform.position;
+            Pos.y -= SPEED.y;
+            obj.transform.position = Pos;
+        }
     }
     void RetrunTo()
     {

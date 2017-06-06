@@ -48,20 +48,20 @@ public class Frog : MonoBehaviour {
         //葉っぱに接しているかを算出//左端
         isGroundedL = Physics2D.Raycast(
             transform.position += new Vector3(-2.3f, 0) , Vector2.down,
-            1.6f, 1 << LayerMask.NameToLayer("Leaf"));
+            0.8f, 1 << LayerMask.NameToLayer("Leaf"));
 
         //葉っぱに接しているかを算出//右端
         isGroundedR = Physics2D.Raycast(
             transform.position += new Vector3(2.3f, 0), Vector2.down,
-            1.6f, 1 << LayerMask.NameToLayer("Leaf"));
+            0.8f, 1 << LayerMask.NameToLayer("Leaf"));
 
 
         if (isGroundedL || isGroundedR)
         {
+            rigidbody.velocity = LOWPOWER;
             if (Input.GetKey(KeyCode.Space))
             {
                 Charge();
-                Debug.Log(power.x);
 
             }
             else if (Input.GetKeyUp(KeyCode.Space))
