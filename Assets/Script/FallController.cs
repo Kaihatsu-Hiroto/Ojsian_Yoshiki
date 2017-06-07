@@ -8,42 +8,32 @@ public class FallController : MonoBehaviour {
 
     Vector3 SPEED = new Vector3(0, 0.01f);
 
-    bool falling;
+    bool falling = false;
 
     Vector3 RestartPos; 
-   
 
     public void Initialize()
     {
-        falling = false;
         obj = GameObject.Find("FallLeaf");
         RestartPos = obj.transform.position; 
     }
 
 	public void UpdateByFrame()
     {
-        Fall();
-        //else
-        //{
-        //    RetrunTo();
-        //}
+
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        falling = true;
-        Debug.Log(falling);
+        
     }
 
     void Fall()
     {
-        if (falling)
-        {
-            Debug.Log("Falling");
-            Vector3 Pos = obj.transform.position;
-            Pos.y -= SPEED.y;
-            obj.transform.position = Pos;
-        }
+        Debug.Log("Falling");
+        Vector3 Pos = obj.transform.position;
+        Pos.y -= SPEED.y;
+        obj.transform.position = Pos;
     }
     void RetrunTo()
     {
