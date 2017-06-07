@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Frog : MonoBehaviour {
 
-    public PowerGage m_powerGage { get; private set; }
+
+   public PowerMater m_powerMater { get; private set; } //追加したゲージ移動動作
 
     Rigidbody2D rigidbody;
     Animator animator;
@@ -30,14 +31,15 @@ public class Frog : MonoBehaviour {
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        m_powerGage = new PowerGage();
-        m_powerGage.Initialize(); 
+
+        m_powerMater = new PowerMater();
+        m_powerMater.Initialize(); 
     }
 
     public void UpdateByFrame()
     {
         GetKeyCode();
-        m_powerGage.UpdateByFrame();
+        m_powerMater.UpdateByFrame();
 
     }
 
@@ -71,7 +73,7 @@ public class Frog : MonoBehaviour {
                 power = LOWPOWER;
             }
         }
-        m_powerGage.UpdateByFrame();
+        m_powerMater.UpdateByFrame(); //Gage⇒Materに書き換え
     }
 
     //ジャンプ力チャージ
