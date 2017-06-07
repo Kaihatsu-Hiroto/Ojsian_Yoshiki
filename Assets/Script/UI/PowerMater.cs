@@ -22,7 +22,7 @@ public class PowerMater : MonoBehaviour {
     {
         m_frogGO = GameObject.FindGameObjectWithTag("Player");
         m_frog = m_frogGO.GetComponent<Frog>();
-        image.fillAmount = m_frog.power.x / 10;
+        image.fillAmount = m_frog.power.x / 10f;
         //m_frog.power.x = m_frog.power.x * 1f;
         //image.fillAmount += 0.01f; 
 
