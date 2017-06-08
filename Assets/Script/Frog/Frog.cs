@@ -13,12 +13,13 @@ public class Frog : MonoBehaviour {
     //着地用変数
     bool isGroundedL;
     bool isGroundedR;
+    bool isGrounded;
 
     //プレイヤー跳躍力
     public Vector3 power = new Vector3(0, 0);
 
     //加算減算用跳躍力
-    Vector3 CHARGE_POW = new Vector3(0.5f, 0.5f);
+    Vector3 CHARGE_POW = new Vector3(0.3f, 0.3f);
 
     //切り返し用フラグ
     int chargeVec = 1;
@@ -47,18 +48,24 @@ public class Frog : MonoBehaviour {
     //ジャンプ入力関係
     void GetKeyCode()
     {
+
         //葉っぱに接しているかを算出//左端
         isGroundedL = Physics2D.Raycast(
-            transform.position += new Vector3(-2.3f, 0) , Vector2.down,
-            0.8f, 1 << LayerMask.NameToLayer("Leaf"));
+            transform.position -= new Vector3(2.0f, 0) , Vector2.down,
+            0.67f, 1 << LayerMask.NameToLayer("Leaf"));
+
+        //葉っぱに接しているかを算出//中央
+        isGrounded = Physics2D.Raycast(
+            transform.position += new Vector3(0, 0), Vector2.down,
+            0.67f, 1 << LayerMask.NameToLayer("Leaf"));
 
         //葉っぱに接しているかを算出//右端
         isGroundedR = Physics2D.Raycast(
-            transform.position += new Vector3(2.3f, 0), Vector2.down,
-            0.8f, 1 << LayerMask.NameToLayer("Leaf"));
+            transform.position += new Vector3(2.0f, 0), Vector2.down,
+            0.67f, 1 << LayerMask.NameToLayer("Leaf"));
 
 
-        if (isGroundedL || isGroundedR)
+        if (isGroundedL || isGroundedR || isGrounded)
         {
             rigidbody.velocity = LOWPOWER;
             if (Input.GetKey(KeyCode.Space))
@@ -73,7 +80,8 @@ public class Frog : MonoBehaviour {
                 power = LOWPOWER;
             }
         }
-        m_powerMater.UpdateByFrame(); //Gage⇒Materに書き換え
+        m_powerMater.UpdateByFrame();
+        
     }
 
     //ジャンプ力チャージ
@@ -100,4 +108,5 @@ public class Frog : MonoBehaviour {
         if (power.x < LOWPOWER.x)
             chargeVec = 1;
     }
+
 }

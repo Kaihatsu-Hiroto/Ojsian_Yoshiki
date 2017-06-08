@@ -6,7 +6,7 @@ public class FallController : MonoBehaviour {
 
     public GameObject obj;
 
-    Vector3 SPEED = new Vector3(0, 0.01f);
+    Vector3 SPEED = new Vector3(0, 0.03f);
 
     bool falling;
 
@@ -22,29 +22,24 @@ public class FallController : MonoBehaviour {
 
 	public void UpdateByFrame()
     {
-        Fall();
-        //else
-        //{
-        //    RetrunTo();
-        //}
+        
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        falling = true;
-        Debug.Log(falling);
+        Fall();
     }
 
     void Fall()
     {
-        if (falling)
-        {
-            Debug.Log("Falling");
-            Vector3 Pos = obj.transform.position;
-            Pos.y -= SPEED.y;
-            obj.transform.position = Pos;
-        }
+
+        Debug.Log("Falling");
+        Vector3 Pos = obj.transform.position;
+        Pos.y -= SPEED.y;
+        obj.transform.position = Pos;
+
     }
+
     void RetrunTo()
     {
         //if(obj.transform.position.y < RestartPos.y)

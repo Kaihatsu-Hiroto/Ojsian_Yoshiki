@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 56c0acd9b8bd0b0469c538eeb8fb0567
-timeCreated: 1496565596
+timeCreated: 1496881381
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_frogGO: {instanceID: 0}
+  - gage: {instanceID: 0}
+  - image: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

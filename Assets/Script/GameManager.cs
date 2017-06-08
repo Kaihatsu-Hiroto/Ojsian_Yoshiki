@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour {
     
     private CameraController m_cameraController;
 
+    public CrocodileController m_crocodileController { get; private set; }
+
     void Start()
     {
         //TODO:処理の分割
@@ -40,8 +43,8 @@ public class GameManager : MonoBehaviour {
         m_fallController = new FallController();
         m_fallController.Initialize();  //初期化
 
-        //m_monsterManager = MonsterManager.Instance;
-        // m_monsterManager.Initialize();  //初期化
+        m_crocodileController = FindObjectOfType<CrocodileController>();
+        m_crocodileController.Initialize();  //初期化
 
         m_cameraController = FindObjectOfType<CameraController>();
         m_cameraController.Initialize();
@@ -53,11 +56,21 @@ public class GameManager : MonoBehaviour {
 
     void Update()
     {
-
         //m_textManager.UpdateByFrame();
         m_cameraController.UpdateByFrame();
-        // m_monsterManager.UpdateByFrame();
+        m_crocodileController.UpdateByFrame();
         m_frogManager.UpdateByFrame();
         m_fallController.UpdateByFrame();
+        GameEnd();
     }
+
+    void GameEnd()
+    {
+        if( m_crocodileController.GameEnd )
+        {
+         
+         //   SceneManager.LoadScene("GameOver");
+        }
+    }
+
 }
